@@ -1,0 +1,11 @@
+requests>=2.31.0
+scapy>=2.5.0
+socket==0.0.0
+threading==0.0.0
+time==0.0.0
+random==0.0.0
+colorama>=0.4.6
+argparse==1.4.0
+dnspython>=2.4.0
+urllib3>=2.0.0
+rich>=13.7.0 
