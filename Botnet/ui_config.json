@@ -1,0 +1,10 @@
+{
+    "ddos_animation_frames": [
+        "[ BOTNET C2 DDOS ]\n[          ] Initializing connection...",
+        "[ BOTNET C2 DDOS ]\n[##        ] Establishing control channels...",
+        "[ BOTNET C2 DDOS ]\n[####      ] Synchronizing botnet nodes...",
+        "[ BOTNET C2 DDOS ]\n[######    ] Launching attack packets...",
+        "[ BOTNET C2 DDOS ]\n[########  ] Monitoring target response...",
+        "[ BOTNET C2 DDOS ]\n[##########] Attack in progress. All systems nominal."
+    ]
+}
