@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Network Testing Tool - Main Program
-Super misto interface: ASCII rosu, text gri, meniu ultra aliniat si modern
+Interfata ultra misto: ASCII rosu, meniu animat, efecte cyber, vibe de terminal hacker real!
 """
 
 import argparse
@@ -17,6 +17,9 @@ from rich.text import Text
 from rich.table import Table
 from rich.panel import Panel
 from rich.align import Align
+from rich.box import HEAVY
+from rich.layout import Layout
+from rich import box
 import random
 
 # Initialize colorama for cross-platform colored output
@@ -64,12 +67,21 @@ def animated_print(text, delay=0.01, color=GRAY):
         time.sleep(delay)
     print(Style.RESET_ALL)
 
+def cyber_glitch(text, color=Fore.RED, delay=0.0007):
+    """Glitchy cyber effect for banners."""
+    glitched = ""
+    for char in text:
+        if char != " " and random.random() < 0.08:
+            glitched += random.choice("!@#$%^&*~<>|\\/[]{}")
+        else:
+            glitched += char
+        print(color + glitched[-1], end='', flush=True)
+        time.sleep(delay)
+    print(Style.RESET_ALL)
+
 def login():
     banner = UI_CONFIG.get('login_banner', 'LOGIN')
-    for char in banner:
-        print(RED + char, end='', flush=True)
-        time.sleep(0.002)
-    print(Style.RESET_ALL)
+    cyber_glitch(banner, color=Fore.RED + Style.BRIGHT, delay=0.001)
     for _ in range(3):
         username = input(GRAY + 'Username: ' + Style.RESET_ALL)
         password = getpass.getpass(GRAY + 'Password: ' + Style.RESET_ALL)
@@ -97,37 +109,47 @@ def print_banner(layer=None):
         banner = UI_CONFIG.get('main_banner', '')
     if not banner:
         banner = "Network Testing Tool"
-    for char in banner:
-        print(RED + char, end='', flush=True)
-        time.sleep(0.001)
-    print(Style.RESET_ALL)
+    cyber_glitch(banner, color=Fore.RED + Style.BRIGHT, delay=0.0007)
 
 main_ascii_art = r'''
-                       ::!~!!!!!:.
-                  .xUHWH!! !!?M88WHX:.
-                .X*#M@$!!  !X!M$$$$$$WWx:.
-               :!!!!!!?H! :!$!$$$$$$$$$$8X:
-              !!~  ~:~!! :~!$!#$$$$$$$$$$8X:
-             :!~::!H!<   ~.U$X!?R$$$$$$$$MM!
-             ~!~!!!!~~ .:XW$$$U!!?$$$$$$RMM!
-               !:~~~ .:!M"T#$$$$WX??#MRRMMM!
-               ~?WuxiW*`   `"#$$$$8!!!!??!!!
-             :X- M$$$$       `"T#$T~!8$WUXU~
-            :%`  ~#$$$m:        ~!~ ?$$$$$$
-          :!`.-   ~T$$$$8xx.  .xWW- ~""##*"
-.....   -~~:<` !    ~?T#$$@@W@*?$$      /`
-W$@@M!!! .!~~ !!     .:XUW$W!~ `"~:    :
-#"~~`.:x%`!!  !H:   !WM$$$$Ti.: .!WUn+!`
-:::~:!!`:X~ .: ?H.!u "$$$B$$$!W:U!T$$M~
-.~~   :X@!.-~   ?@WTWo("*$$$W$TH$! `
-Wi.~!X$?!-~    : ?$$$B$Wu("**$RM!
-$R@i.~~ !     :   ~$$$$$B$$en:``
-?MXT@Wx.~    :     ~"##*$$$$M~
+            ;               ,
+         ,;                 '.
+        ;:                   :;
+       ::                     ::
+       :>                     ::
+       ':                     :
+        :.                    :
+     ;' ::                   ::  '
+    .'  ';                   ;'  '|
+   ::    :;                 ;:    ::
+   ;      :;.             ,;:     ::
+   :;      :;:           ,;"      ::
+   ::.      ':;  ..*.;  ;:'     ,.~:
+    "'"...   '::,:</:: ;:   .;.;""'
+        '"""....;:]:::;,;.;"""                          C2 Server [ L7 & L4 ]
+    .:::.....'">]::::::'",...;::::;.
+   ;:' '""'"";.,;:::::;.'"$""""  ':;   
+ ;'     ,;;:;::::::::::::::;";..    ':.
+::     ;:"  :::}::"""'::::::  ":     &:
+ :.    ::   ::::::;  :::::::   :     ;
+  ;    ::   :::::::  :::{:$:   :    ;  
+    '  ::    :::::::::::::"   ::
+       ::     ':::::::::"'    ::
+       ':       """""""'      ::
+        ::                   ;:
+        ':;                 ;:"
+          ';              ,;'
+            "'           '"
+              
 '''
 
-def animated_banner(text, delay=0.001):
+def animated_banner(text, delay=0.0005):
+    """Banner with cyber-glitch effect."""
     for char in text:
-        print(RED + char, end='', flush=True)
+        if char != " " and random.random() < 0.04:
+            print(Fore.LIGHTWHITE_EX + Style.BRIGHT + random.choice("!@#$%^&*~<>|\\/[]{}"), end='', flush=True)
+        else:
+            print(RED + char, end='', flush=True)
         time.sleep(delay)
     print(Style.RESET_ALL)
 
@@ -143,42 +165,55 @@ def ddos_animation(cycles=2, delay=0.12):
             print(RED + frame + Style.RESET_ALL)
             time.sleep(delay)
 
-def build_realistic_menu():
-    # Realistic, hacker-style menu using ASCII and rich, compact, no childish separators
+def build_ultra_menu(selected_idx=0):
+    # Ultra misto, ultra realist: no emoji, cyber terminal, highlight, ASCII lines
+    menu_items = [
+        ("1", "Cloudflare Bypass", "cloudflare"),
+        ("2", "FiveM Tester", "fivem"),
+        ("3", "Layer4 Tester", "layer4"),
+        ("4", "Layer7 Tester", "layer7"),
+        ("5", "Minecraft Tester", "minecraft"),
+        ("6", "WAF Bypass", "waf"),
+        ("7", "Exit", None)
+    ]
     table = Table(
         show_header=False,
-        box=None,
-        expand=True,
+        box=box.SQUARE,
+        expand=False,
         padding=(0, 2),
         style="white on black"
     )
-    menu_rows = [
-        ("[bold red]1[/]. [white]Cloudflare Bypass",),
-        ("[bold red]2[/]. [white]FiveM Tester",),
-        ("[bold red]3[/]. [white]Layer4 Tester",),
-        ("[bold red]4[/]. [white]Layer7 Tester",),
-        ("[bold red]5[/]. [white]Minecraft Tester",),
-        ("[bold red]6[/]. [white]WAF Bypass",),
-        ("[bold red]7[/]. [white]Exit",),
-    ]
-    for row in menu_rows:
-        table.add_row(row[0])
+    for idx, (num, label, _) in enumerate(menu_items):
+        if idx == selected_idx:
+            table.add_row(
+                f"[bold reverse bright_white]{num}[/bold reverse bright_white]",
+                f"[bold reverse red]{label}[/bold reverse red]"
+            )
+        else:
+            table.add_row(
+                f"[bold red]{num}[/bold red]",
+                f"[white]{label}[/white]"
+            )
     return table
 
-def show_menu():
+def show_menu(selected_idx=0):
     os.system('cls' if os.name == 'nt' else 'clear')
-    animated_banner(main_ascii_art, delay=0.0002)
+    animated_banner(main_ascii_art, delay=0.00015)
     print()
-    border = "=" * 46
-    title = "[bold white] Server C2 Panel [/bold white]"
-    console.print(f"[bold red]{border}[/bold red]", justify="center")
+    # ESCIUL FRUMOS ALINIAT
+    esciul = "EXIT"
+    console.print(f"[bold red]{esciul}[/bold red]", justify="center")
+    print()
+    border = " " * 0 + ""  # Eliminat caracterele de langa esciul
+    title = "[bold white on red]  BOTNET C2 - CYBER PANEL  [/bold white on red]"
     console.print(title, justify="center")
-    console.print(f"[bold red]{border}[/bold red]", justify="center")
+    # Menu panel with cyber border
     menu_panel = Panel(
-        Align.center(build_realistic_menu(), vertical="middle"),
-        border_style="white",
-        padding=(1, 4),
-        width=60
+        Align.center(build_ultra_menu(selected_idx), vertical="middle"),
+        border_style="bold red",
+        box=box.HEAVY,
+        padding=(1, 6),
+        width=70
     )
     console.print(menu_panel, justify="center")
     # Status/info bar for realism
